@@ -19,7 +19,7 @@ public partial class Carryng
     public virtual Warehouse? IdWarehouseNavigation { get; set; }
 
 
-    public virtual int NewIndex()
+    public virtual int NewIndex() // метод определения нового перчивного ключа для таблицы Carryng
     {
         using (WarehouseDataBaseContext db = new WarehouseDataBaseContext())
         {
@@ -33,9 +33,9 @@ public partial class Carryng
             return (Max+1);
         }
     }
-    public virtual void AddNew(int idProduct, int idWarehouse, int quanity) //
+    public virtual void AddNew(int idProduct, int idWarehouse, int quanity) // метод добавления новой записи в таблицу Carryng
     {
-        //Создаем новый объект Carryng из параметров запроса
+        
         Carryng newData = new Carryng();
         newData.IdCarryng = newData.NewIndex();
         newData.IdProduct = idProduct;
@@ -49,7 +49,7 @@ public partial class Carryng
 
     }
 
-    public virtual List<Carryng> GetAll()
+    public virtual List<Carryng> GetAll() //метод вывода всей таблицы Carryng
     {
         using (WarehouseDataBaseContext db = new WarehouseDataBaseContext())
         {
@@ -57,7 +57,7 @@ public partial class Carryng
         }
     }
 
-    public virtual void DeleteById(int id_carryng)
+    public virtual void DeleteById(int id_carryng) // метод удаления записи в таблицы Carryng по ID
     {
         using (WarehouseDataBaseContext db = new WarehouseDataBaseContext())
         {

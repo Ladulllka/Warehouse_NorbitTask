@@ -10,7 +10,7 @@
         public virtual Product? IdProductNavigation { get; set; }
         public virtual Warehouse? IdWarehouseNavigation { get; set; }
 
-        public virtual int NewIndex()
+        public virtual int NewIndex() //метод определение нового первичного ключа 
         {
             using (WarehouseDataBaseContext db = new WarehouseDataBaseContext())
             {
@@ -24,7 +24,7 @@
                 return (Max+1);
             }
         }
-        public virtual void AddNew(int idProduct, int idWarehouse, int quanity) //
+        public virtual void AddNew(int idProduct, int idWarehouse, int quanity) //метод добавления в таблицу Sales новой записи 
         {
             //Создаем новый объект Carryng из параметров запроса
             Sales newData = new Sales();
@@ -40,7 +40,7 @@
 
         }
   
-        public virtual List<Sales> GetAll()
+        public virtual List<Sales> GetAll()// метод вывода всей таблицы Sales
         {
             using (WarehouseDataBaseContext db = new WarehouseDataBaseContext())
             {
@@ -48,7 +48,7 @@
             }
         }
 
-        public virtual void DeleteById(int id_sales)
+        public virtual void DeleteById(int id_sales)//метод удаления записи по ID из таблицы Sales
         {
             using (WarehouseDataBaseContext db = new WarehouseDataBaseContext())
             {

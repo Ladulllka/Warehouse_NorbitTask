@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Warehouse.Model;
 
-public partial class WarehouseDataBaseContext : DbContext
+public partial class WarehouseDataBaseContext : DbContext //создание контекста базы данных
 {
     public WarehouseDataBaseContext()
     {
     }
 
-    public virtual DbSet<Carryng> Carryngs { get; set; }
+    public virtual DbSet<Carryng> Carryngs { get; set; } //добавление свойств для каждой таблицы из БД в котекст
 
     public virtual DbSet<Category> Categories { get; set; }
 
@@ -22,21 +22,21 @@ public partial class WarehouseDataBaseContext : DbContext
 
     public virtual DbSet<Sales> Saleses { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)=> optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=WarehouseDataBase;Username=postgres;Password=0000");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)=> optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=WarehouseDataBase;Username=postgres;Password=0000"); // подключение к базе данных в PostrgeSQl
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Carryng>(entity =>
+        modelBuilder.Entity<Carryng>(entity =>  //присваивание классу Carryng таблице Carryng из БД
         {
-            entity.ToTable("carryng");
-            entity.HasKey(e => e.IdCarryng).HasName("carryng_pkey");
+            entity.ToTable("carryng"); 
+            entity.HasKey(e => e.IdCarryng).HasName("carryng_pkey"); // Задаём первичный ключ
 
-            entity.Property(e => e.IdCarryng).ValueGeneratedNever().HasColumnName("id_carryng");
+            entity.Property(e => e.IdCarryng).ValueGeneratedNever().HasColumnName("id_carryng"); //соотношение свойства класса и столбца из БД
             entity.Property(e => e.IdProduct).HasColumnName("id_product");
             entity.Property(e => e.IdWarehouse).HasColumnName("id_warehouse");
             entity.Property(e => e.Quanity).HasColumnName("quanity");
 
-            entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.Carryngs).HasForeignKey(d => d.IdProduct).HasConstraintName("carryng_id_product_fkey");
+            entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.Carryngs).HasForeignKey(d => d.IdProduct).HasConstraintName("carryng_id_product_fkey"); //соотношение свойства классса и внешнего ключа из БД
             entity.HasOne(d => d.IdWarehouseNavigation).WithMany(p => p.Carryngs).HasForeignKey(d => d.IdWarehouse).HasConstraintName("carryng_id_warehouse_fkey");
         });
 
